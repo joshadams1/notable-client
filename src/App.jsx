@@ -5,7 +5,7 @@ import Doctors from './Doctors'
 function App() {
   return (
     <div className="App">
-      <h1 style={{marginBottom: "30px"}}>Doctors</h1>
+      <h1>Doctors</h1>
       <Doctors />
     </div>
   )

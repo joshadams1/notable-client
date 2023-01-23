@@ -27,14 +27,22 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
+}
+
+.doctor-tab {
+  margin-right: 10px;
+}
+
+.doctor-table {
+  margin-top: 10px;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  margin-bottom: 30px;
 }
 
 button {

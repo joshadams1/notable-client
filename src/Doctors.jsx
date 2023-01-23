@@ -1,17 +1,17 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
-import { Grid, GridItem } from '@chakra-ui/react';
 import {
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCaption,
     TableContainer,
-} from '@chakra-ui/react'
+    Grid, 
+    GridItem
+} from '@chakra-ui/react';
+
 
 function Doctors() {
     const [doctors, setDoctors] = useState([]);
@@ -21,7 +21,6 @@ function Doctors() {
         async function fetchData() {
             const res = await fetch('http://localhost:8000/doctors');
             const data = await res.json();
-            console.log('data =>', data);
             setDoctors(data);
         }
         fetchData();
@@ -34,7 +33,7 @@ function Doctors() {
     }
 
     return (
-        <Tabs isFitted variant='enclosed'>
+        <Tabs isFitted variant='enclosed' className='doctors'>
             <Grid
                 templateColumns='repeat(5, 1fr)'
             >
@@ -44,7 +43,7 @@ function Doctors() {
                     >
                         <TabList>
                             {doctors.map((doctor, idx) => {
-                                return (<Grid item><Tab onClick={() => grabAppointments(doctor.id)} style={{ marginRight: "10px" }} key={idx}>{doctor.firstName} {doctor.lastName}</Tab></Grid>)
+                                return (<Grid item className='doctor-tab'><Tab onClick={() => grabAppointments(doctor.id)} key={idx}>{doctor.firstName} {doctor.lastName}</Tab></Grid>)
                             })}
                         </TabList>
                     </Grid>
@@ -54,21 +53,23 @@ function Doctors() {
                         {doctors.map((doctor, idx) => {
                             return (
                                 <div>
-                                <TabPanel style={{ marginTop: "10px" }} key={idx}>
+                                <TabPanel className='doctor-table' key={idx}>
                                     <h2>{doctor.email}</h2>
                                     <TableContainer>
                                         <Table variant='simple'>
                                             <Thead>
                                                 <Tr>
+                                                    <Th>#</Th>
                                                     <Th>Name</Th>
                                                     <Th>Time</Th>
                                                     <Th>Kind</Th>
                                                 </Tr>
                                             </Thead>
-                                            {appointments.map(appointment => {
+                                            {appointments.map((appointment, idx) => {
                                                 return (
                                                     <Tbody>
                                                         <Tr>
+                                                            <Td>{idx + 1}</Td>
                                                             <Td>{appointment.name}</Td>
                                                             <Td>{appointment.time}</Td>
                                                             <Td>{appointment.kind}</Td>
